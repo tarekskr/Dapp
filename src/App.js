@@ -42,7 +42,9 @@ class App extends Component {
             <OnlyGuestLinks />
             <OnlyAuthLinks />
           </ul>
-          <Link to="/" className="pure-menu-heading pure-menu-link">Truffle Box</Link>
+          <Link to="/" className="pure-menu-heading pure-menu-link">Home</Link>
+          <Link to="/deploy" className="pure-menu-heading pure-menu-link">Deploy New Contract</Link>
+          <Link to="/sim-exchange" className="pure-menu-heading pure-menu-link">Sim Exchange</Link>
         </nav>
 
         {this.props.children}
