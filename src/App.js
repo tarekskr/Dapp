@@ -44,6 +44,7 @@ class App extends Component {
           </ul>
           <Link to="/" className="pure-menu-heading pure-menu-link">Home</Link>
           <Link to="/deploy" className="pure-menu-heading pure-menu-link">Deploy New Contract</Link>
+          <Link to="/contract-explorer" className="pure-menu-heading pure-menu-link">Contract Explorer</Link>
           <Link to="/sim-exchange" className="pure-menu-heading pure-menu-link">Sim Exchange</Link>
         </nav>
 
