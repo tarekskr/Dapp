@@ -18,4 +18,4 @@ class Deploy extends Component {
   }
 }
 
-export default Home
+export default Deploy

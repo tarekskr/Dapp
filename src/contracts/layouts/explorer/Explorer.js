@@ -18,4 +18,4 @@ class Explorer extends Component {
   }
 }
 
-export default Home
+export default Explorer
