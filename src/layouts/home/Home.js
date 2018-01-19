@@ -8,7 +8,7 @@ class Home extends Component {
           <div className="pure-u-1-1">
             <h1>Welcome to the MARKET decentralized application!</h1>
             <h2>Smart Contract Authentication And Login</h2>
-            <p>This particular box comes with autentication via a smart contract built-in.</p>
+            <p>This particular box comes with authentication via a smart contract built-in.</p>
             <p>In the upper-right corner, you'll see a login button. Click it to login with with the Authentication smart contract. If there is no user information for the given address, you'll be redirected to sign up. There are two authenticated routes: "/dashboard", which displays the user's name once authenticated; and "/profile", which allows a user to update their name.</p>
             <h3>Redirect Path</h3>
             <p>This example redirects home ("/") when trying to access an authenticated route without first authenticating. You can change this path in the failureRedriectUrl property of the UserIsAuthenticated wrapper on <strong>line 9</strong> of util/wrappers.js.</p>
