@@ -6,9 +6,8 @@ class Home extends Component {
       <main className="container">
         <div className="pure-g">
           <div className="pure-u-1-1">
-            <h1>Good to Go!</h1>
-            <p>Your Truffle Box is installed and ready.</p>
-            <h2>Smart Contract Authentication</h2>
+            <h1>Welcome to the MARKET decentralized application!</h1>
+            <h2>Smart Contract Authentication And Login</h2>
             <p>This particular box comes with autentication via a smart contract built-in.</p>
             <p>In the upper-right corner, you'll see a login button. Click it to login with with the Authentication smart contract. If there is no user information for the given address, you'll be redirected to sign up. There are two authenticated routes: "/dashboard", which displays the user's name once authenticated; and "/profile", which allows a user to update their name.</p>
             <h3>Redirect Path</h3>
@@ -16,7 +15,7 @@ class Home extends Component {
             <h3>Accessing User Data</h3>
             <p>Once authenticated, any component can access the user's data by assigning the authData object to a component's props.<br/><code>{"// In component's render function."}<br/>{"const { authData } = this.props"}<br/><br/>{"// Use in component."}<br/>{"Hello { this.props.authData.name }!"}</code></p>
             <h3>Further Reading</h3>
-            <p>The React/Redux portions of the authentication fuctionality are provided by <a href="https://github.com/mjrussell/redux-auth-wrapper" target="_blank">mjrussell/redux-auth-wrapper</a>.</p>
+            <p>The React/Redux portions of the authentication functionality are provided by <a href="https://github.com/mjrussell/redux-auth-wrapper" target="_blank">mjrussell/redux-auth-wrapper</a>.</p>
           </div>
         </div>
       </main>
