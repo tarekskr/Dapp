@@ -20,9 +20,9 @@ At this point you can start the truffle development environment
 ```
 $ truffle develop
 ```
-and inside the truffle deploy the smart contracts included in this project
+and inside the truffle console deploy the smart contracts included in this project
 ```
-$ truffle migrate
+truffle(develop)> migrate
 ```
 From here, you now need to bring up the ethereum bridge for the Oraclize.it service.  Instructions for installtion can be found [here](https://github.com/MarketProject/ethereum-bridge) 
 
