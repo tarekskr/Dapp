@@ -17,50 +17,17 @@ export function loadContracts() {
 
       // Declaring this for later so we can chain functions.
       var marketContractRegistryInstance
-
-      // Get current ethereum wallet.
-      web3.eth.getCoinbase((error, coinbase) => {
-        // Log errors, if any.
-        if (error) {
-          console.error(error);
-        }
-
-        marketContractRegistry.deployed().then(function(instance) {
-          marketContractRegistryInstance = instance
-
-          // Attempt to find deployed contracts
-          marketContractRegistryInstance.getAddressWhiteList.call().then(function(deployed_contracts) {
-            console.log("Found "  + deployed_contracts.length + " contracts deployed");
-            for (var index = 0; index < deployed_contracts.length; index ++)
-            {
-              console.log(deployed_contracts[index]);
-            }
-          })
-
-//          marketContractRegistryInstance.login({from: coinbase})
-//          .then(function(result) {
-//            // If no error, login user.
-//            var userName = web3.toUtf8(result)
-//
-//            dispatch(userLoggedIn({"name": userName}))
-//
-//            // Used a manual redirect here as opposed to a wrapper.
-//            // This way, once logged in a user can still access the home page.
-//            var currentLocation = browserHistory.getCurrentLocation()
-//
-//            if ('redirect' in currentLocation.query)
-//            {
-//              return browserHistory.push(decodeURIComponent(currentLocation.query.redirect))
-//            }
-//
-//            return browserHistory.push('/dashboard')
-//          })
-//          .catch(function(result) {
-//            // If error, go to signup page.
-//            console.error('Wallet ' + coinbase + ' does not have an account!')
-//
-//            return browserHistory.push('/signup')
-//          })
+      marketContractRegistry.deployed().then(function(instance) {
+        marketContractRegistryInstance = instance
+        console.log("Found the Market Contract Registry at" + instance.address)
+        // Attempt to find deployed contracts
+        marketContractRegistryInstance.getAddressWhiteList.call().then(function(deployed_contracts) {
+          console.log("Found "  + deployed_contracts.length + " contracts deployed");
+          for (var index = 0; index < deployed_contracts.length; index ++)
+          {
+            console.log(deployed_contracts[index]);
+            //TODO: creat nice contract explorer that has filters and search
+          }
         })
       })
     }
