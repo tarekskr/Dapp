@@ -1,4 +1,6 @@
 import MarketContractRegistry from '../../../../build/contracts/MarketContractRegistry.json'
+import MarketContract from '../../../../build/contracts/MarketContractOraclize.json'
+import MarketCollateralPool from '../../../../build/contracts/MarketCollateralPool.json'
 //import { browserHistory } from 'react-router'
 import store from '../../../store'
 
@@ -11,23 +13,53 @@ export function loadContracts() {
   if (typeof web3 !== 'undefined') {
 
     return function(dispatch) {
-      // Using truffle-contract we create the MarketContractRegistry object.
+
+      // Using truffle-contract create needed contract objects and set providers
       const marketContractRegistry = contract(MarketContractRegistry)
       marketContractRegistry.setProvider(web3.currentProvider)
+
+      const marketContract = contract(MarketContract);
+      marketContract.setProvider(web3.currentProvider);
+
+      const marketCollateralPool = contract(MarketCollateralPool);
+      marketCollateralPool.setProvider(web3.currentProvider);
 
       // Declaring this for later so we can chain functions.
       var marketContractRegistryInstance
       marketContractRegistry.deployed().then(function(instance) {
         marketContractRegistryInstance = instance
         console.log("Found the Market Contract Registry at" + instance.address)
-        // Attempt to find deployed contracts
-        marketContractRegistryInstance.getAddressWhiteList.call().then(function(deployed_contracts) {
-          console.log("Found "  + deployed_contracts.length + " contracts deployed");
-          for (var index = 0; index < deployed_contracts.length; index ++)
+
+        // Attempt to find deployed contracts and get metadata
+        marketContractRegistryInstance.getAddressWhiteList.call().then(function(deployedContracts) {
+          console.log("Found "  + deployedContracts.length + " contracts deployed");
+          var contractsToDisplay = [];
+          for (var index = 0; index < deployedContracts.length; index ++)
           {
-            console.log(deployed_contracts[index]);
-            //TODO: creat nice contract explorer that has filters and search
+            marketContract.at(deployedContracts[index]).then(async function(instance){
+                var contractJSON = [];
+                contractJSON["CONTRACT_NAME"] = await instance.CONTRACT_NAME.call()
+                contractJSON["BASE_TOKEN"] = await instance.BASE_TOKEN.call()
+                contractJSON["PRICE_FLOOR"] = await instance.PRICE_FLOOR.call()
+                contractJSON["PRICE_CAP"] = await instance.PRICE_CAP.call()
+                contractJSON["PRICE_DECIMAL_PLACES"] = await instance.PRICE_DECIMAL_PLACES.call()
+                contractJSON["QTY_DECIMAL_PLACES"] = await instance.QTY_DECIMAL_PLACES.call()
+                contractJSON["ORACLE_QUERY"] = await instance.ORACLE_QUERY.call()
+                contractJSON["lastPrice"] = await instance.lastPrice.call()
+                contractJSON["isSettled"] = await instance.isSettled.call()
+
+                marketCollateralPool.at(
+                  await instance.marketCollateralPoolAddress.call()
+                ).then(async function(collateralPoolInstance){
+                  contractJSON["collateralPoolBalance"] = await collateralPoolInstance.collateralPoolBalance.call()
+                })
+
+                console.log(contractJSON["CONTRACT_NAME"] + " created");
+                contractsToDisplay.push(contractJSON);
+            })
           }
+          console.log(contractsToDisplay);
+          //TODO: build table and display.
         })
       })
     }
