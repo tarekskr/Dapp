@@ -33,11 +33,11 @@ export function loadContracts() {
         // Attempt to find deployed contracts and get metadata
         marketContractRegistryInstance.getAddressWhiteList.call().then(function(deployedContracts) {
           console.log("Found "  + deployedContracts.length + " contracts deployed");
-          var contractsToDisplay = [];
+          const contractsToDisplay = [];
           for (var index = 0; index < deployedContracts.length; index ++)
           {
             marketContract.at(deployedContracts[index]).then(async function(instance){
-                var contractJSON = [];
+                const contractJSON = [];
                 contractJSON["CONTRACT_NAME"] = await instance.CONTRACT_NAME.call()
                 contractJSON["BASE_TOKEN"] = await instance.BASE_TOKEN.call()
                 contractJSON["PRICE_FLOOR"] = await instance.PRICE_FLOOR.call()
