@@ -2,10 +2,9 @@ import MarketContractRegistry from '../../../../build/contracts/MarketContractRe
 import MarketContract from '../../../../build/contracts/MarketContractOraclize.json'
 import MarketCollateralPool from '../../../../build/contracts/MarketCollateralPool.json'
 import MarketToken from '../../../../build/contracts/MarketToken.json'
-//import OrderLib from '../../../../build/contracts/OrderLib.json'
 import store from '../../../store'
 
-const contract = require('truffle-contract')
+const contract = require('truffle-contract');
 
 export function deployContract(contractSpecs) {
 
@@ -30,7 +29,7 @@ export function deployContract(contractSpecs) {
     // orderLib.setProvider(web3.currentProvider);
 
     // create array to pass to MARKET contract constructor
-    const contractConstuctorArray = [
+    const contractConstructorArray = [
       contractSpecs.priceFloor,
       contractSpecs.priceCap,
       contractSpecs.priceDecimalPlaces,
@@ -38,32 +37,44 @@ export function deployContract(contractSpecs) {
       contractSpecs.expirationTimeStamp
     ];
 
-    // find the address of the MKT token so we can link to our deployed contract
-    marketToken.deployed().then(function (marketTokenInstance) {
-      marketContract.new(
-        contractSpecs.contractName,
-        marketTokenInstance.address,
-        contractSpecs.baseTokenAddress,
-        contractConstuctorArray,
-        contractSpecs.oracleDataSource,
-        contractSpecs.oracleQuery,
-        contractSpecs.oracleQueryRepeatSeconds,
-        {gas: 6100000, value: web3.toWei('.2', 'ether')} //TODO remove hard coded gas
-      ).then(function (marketContractInstance) {
-        marketCollateralPool.new(marketContractInstance.address, {gas: 5100000}).then(
-          function (marketCollateralPoolInstance) {
-            marketContractInstance.setCollateralPoolContractAddress(marketCollateralPoolInstance.address).then(function () {
-              marketContractRegistry.deployed().then(function (marketContractRegistryInstance) {
-                marketContractRegistryInstance.addAddressToWhiteList(marketContractInstance.address,
-                  {from: web3.eth.accounts[0]});
-              })
-            })
-          }
-        )
-      })
-    });
+    // Get current ethereum wallet.
+    web3.eth.getCoinbase((error, coinbase) => {
+        // Log errors, if any.
+        if (error) {
+          console.error(error);
+        }
 
+        console.log("Attempting to deploy contract from " + coinbase);
+        // find the address of the MKT token so we can link to our deployed contract
+        marketToken.deployed().then(function (marketTokenInstance) {
+           return marketContract.new(
+            contractSpecs.contractName,
+            marketTokenInstance.address,
+            contractSpecs.baseTokenAddress,
+            contractConstructorArray,
+            contractSpecs.oracleDataSource,
+            contractSpecs.oracleQuery,
+            contractSpecs.oracleQueryRepeatSeconds,
+            {value: web3.toWei('.2', 'ether'), gasPrice: 100000000, from: coinbase}
+          );
+        }).then(function (marketContractInstance) {
+          console.log(marketContractInstance);
+          marketCollateralPool.new(marketContractInstance.address, {gas: 5100000}).then(
+            function (marketCollateralPoolInstance) {
+              console.log("marketCollateralPoolInstance created");
+              return marketContractInstance.setCollateralPoolContractAddress(marketCollateralPoolInstance.address).then(function () {
+                marketContractRegistry.deployed().then(function (marketContractRegistryInstance) {
+                  return marketContractRegistryInstance.addAddressToWhiteList(marketContractInstance.address,
+                    {from: web3.eth.accounts[0]});
+                })
+              })
+            }
+          )
+        })
+      }
+    );
   } else {
     console.error('Web3 is not initialized.');
   }
 }
+
