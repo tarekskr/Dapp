@@ -46,8 +46,9 @@ export function deployContract(contractSpecs) {
 
         console.log("Attempting to deploy contract from " + coinbase);
         // find the address of the MKT token so we can link to our deployed contract
+        let marketContractInstanceDeployed;
         marketToken.deployed().then(function (marketTokenInstance) {
-           return marketContract.new(
+          return marketContract.new(
             contractSpecs.contractName,
             marketTokenInstance.address,
             contractSpecs.baseTokenAddress,
@@ -55,26 +56,24 @@ export function deployContract(contractSpecs) {
             contractSpecs.oracleDataSource,
             contractSpecs.oracleQuery,
             contractSpecs.oracleQueryRepeatSeconds,
-            {value: web3.toWei('.2', 'ether'), gasPrice: 100000000, from: coinbase}
+            {gas: 6100000, value: web3.toWei('.2', 'ether'), gasPrice: 100000000, from: coinbase}
           );
         }).then(function (marketContractInstance) {
-          console.log(marketContractInstance);
-          marketCollateralPool.new(marketContractInstance.address, {gas: 5100000}).then(
-            function (marketCollateralPoolInstance) {
-              console.log("marketCollateralPoolInstance created");
-              return marketContractInstance.setCollateralPoolContractAddress(marketCollateralPoolInstance.address).then(function () {
-                marketContractRegistry.deployed().then(function (marketContractRegistryInstance) {
-                  // TODO - to add to the white list we must call this from the account we
-                  // deployed the initial contracts with which is the 1st truffle account in the test environment
-                  // we need to figure out how to handle this
-                  return marketContractRegistryInstance.addAddressToWhiteList(
-                      marketContractInstance.address,
-                      {from: web3.eth.accounts[0]}
-                    );
-                })
-              })
-            }
+          marketContractInstanceDeployed = marketContractInstance;
+          return marketCollateralPool.new(marketContractInstance.address, {gas: 5100000, from: coinbase});
+        }).then(function (marketCollateralPoolInstance) {
+          return marketContractInstanceDeployed.setCollateralPoolContractAddress(
+            marketCollateralPoolInstance.address,
+            {from: coinbase}
           )
+        }).then(function () {
+          return marketContractRegistry.deployed()
+        }).then(function (marketContractRegistryInstance) {
+            marketContractRegistryInstance.addAddressToWhiteList(
+              marketContractInstanceDeployed.address,
+              {from: web3.eth.accounts[0]}
+            );
+            //TODO alert user when successful
         })
       }
     );
