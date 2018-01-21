@@ -20,11 +20,8 @@ At this point you can start the truffle development environment
 ```
 $ truffle develop
 ```
-and inside the truffle console deploy the smart contracts included in this project
-```
-truffle(develop)> migrate
-```
-From here, you now need to bring up the ethereum bridge for the Oraclize.it service.  Instructions for installtion can be found [here](https://github.com/MarketProject/ethereum-bridge) 
+
+From here, you now need to bring up the ethereum bridge for the Oraclize.it service.  Instructions for installation can be found [here](https://github.com/MarketProject/ethereum-bridge) 
 
 start the ethereum bridge (in a separate console) to run connected
 to the truffle development environment you have created
@@ -35,18 +32,13 @@ $ node bridge -H localhost:9545 -a 9 --dev
 Once the bridge has fully initialized, you should be able to run the example migrations for the MARKET smart contracts.
 
 ```
-$ git clone https://github.com/MarketProject/MarketProtocol.git
-$ cd MarketProtocol
-$ npm install
-$ truffle develop
 truffle(develop)> migrate
 ```
 If this fails due to a `revert` , please be sure the bridge is listening prior to attempting the migration.
 
-All needed contracts should now be deployed, we need to copy over the ABI's from MarketProtocol/build/contracts to Dapp/build/contracts and we can then start the Dapp.
+Now we can bring Dapp with the commands below
 
 ```
-$ cp ~/MarketProtocol/build/contracts/*.json ~/Dapp/build/contracts/
 $ cd Dapp
 $ npm run start
 ```
