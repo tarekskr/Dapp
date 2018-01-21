@@ -64,8 +64,13 @@ export function deployContract(contractSpecs) {
               console.log("marketCollateralPoolInstance created");
               return marketContractInstance.setCollateralPoolContractAddress(marketCollateralPoolInstance.address).then(function () {
                 marketContractRegistry.deployed().then(function (marketContractRegistryInstance) {
-                  return marketContractRegistryInstance.addAddressToWhiteList(marketContractInstance.address,
-                    {from: web3.eth.accounts[0]});
+                  // TODO - to add to the white list we must call this from the account we
+                  // deployed the initial contracts with which is the 1st truffle account in the test environment
+                  // we need to figure out how to handle this
+                  return marketContractRegistryInstance.addAddressToWhiteList(
+                      marketContractInstance.address,
+                      {from: web3.eth.accounts[0]}
+                    );
                 })
               })
             }
