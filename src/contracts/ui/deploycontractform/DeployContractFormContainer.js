@@ -3,20 +3,20 @@ import DeployContractForm from './DeployContractForm'
 import {deployContract} from './DeployContractFormAction'
 
 const mapStateToProps = (state, ownProps) => {
-    return {}
+  return {}
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        onDeployContractFormDeploy: (contractSpecs) => {
-            dispatch(deployContract(contractSpecs))
-        }
+  return {
+    onDeployContractFormDeploy: (contractSpecs) => {
+      dispatch(deployContract(contractSpecs))
     }
+  }
 }
 
 const DeployContractFormContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(DeployContractForm)
 
 export default DeployContractFormContainer

@@ -3,22 +3,22 @@ import LoginButton from './LoginButton'
 import {loginUser} from './LoginButtonActions'
 
 const mapStateToProps = (state, ownProps) => {
-    return {}
+  return {}
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        onLoginUserClick: (event) => {
-            event.preventDefault();
+  return {
+    onLoginUserClick: (event) => {
+      event.preventDefault();
 
-            dispatch(loginUser())
-        }
+      dispatch(loginUser())
     }
+  }
 }
 
 const LoginButtonContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(LoginButton)
 
 export default LoginButtonContainer

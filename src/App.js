@@ -13,9 +13,9 @@ import './css/pure-min.css'
 import './App.css'
 
 class App extends Component {
-    render() {
-        const OnlyAuthLinks = VisibleOnlyAuth(() =>
-                <span>
+  render() {
+    const OnlyAuthLinks = VisibleOnlyAuth(() =>
+      <span>
         <li className="pure-menu-item">
           <Link to="/dashboard" className="pure-menu-link">Dashboard</Link>
         </li>
@@ -24,34 +24,34 @@ class App extends Component {
         </li>
         <LogoutButtonContainer/>
       </span>
-        )
+    )
 
-        const OnlyGuestLinks = HiddenOnlyAuth(() =>
-                <span>
+    const OnlyGuestLinks = HiddenOnlyAuth(() =>
+      <span>
         <li className="pure-menu-item">
           <Link to="/signup" className="pure-menu-link">Sign Up</Link>
         </li>
         <LoginButtonContainer/>
       </span>
-        )
+    )
 
-        return (
-            <div className="App">
-                <nav className="navbar pure-menu pure-menu-horizontal">
-                    <ul className="pure-menu-list navbar-right">
-                        <OnlyGuestLinks/>
-                        <OnlyAuthLinks/>
-                    </ul>
-                    <Link to="/" className="pure-menu-heading pure-menu-link">Home</Link>
-                    <Link to="/deploy" className="pure-menu-heading pure-menu-link">Deploy New Contract</Link>
-                    <Link to="/contract-explorer" className="pure-menu-heading pure-menu-link">Contract Explorer</Link>
-                    <Link to="/sim-exchange" className="pure-menu-heading pure-menu-link">Sim Exchange</Link>
-                </nav>
+    return (
+      <div className="App">
+        <nav className="navbar pure-menu pure-menu-horizontal">
+          <ul className="pure-menu-list navbar-right">
+            <OnlyGuestLinks/>
+            <OnlyAuthLinks/>
+          </ul>
+          <Link to="/" className="pure-menu-heading pure-menu-link">Home</Link>
+          <Link to="/deploy" className="pure-menu-heading pure-menu-link">Deploy New Contract</Link>
+          <Link to="/contract-explorer" className="pure-menu-heading pure-menu-link">Contract Explorer</Link>
+          <Link to="/sim-exchange" className="pure-menu-heading pure-menu-link">Sim Exchange</Link>
+        </nav>
 
-                {this.props.children}
-            </div>
-        );
-    }
+        {this.props.children}
+      </div>
+    );
+  }
 }
 
 export default App

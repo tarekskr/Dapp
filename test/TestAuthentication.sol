@@ -6,14 +6,14 @@ import "../contracts/Authentication.sol";
 
 contract TestAuthentication {
 
-  function testUserCanSignUpAndLogin() {
-    Authentication authentication = Authentication(DeployedAddresses.Authentication());
+    function testUserCanSignUpAndLogin() {
+        Authentication authentication = Authentication(DeployedAddresses.Authentication());
 
-    authentication.signup('testuser');
+        authentication.signup('testuser');
 
-    bytes32 expected = 'testuser';
+        bytes32 expected = 'testuser';
 
-    Assert.equal(authentication.login(), expected, "It should sign up and log in a user.");
-  }
+        Assert.equal(authentication.login(), expected, "It should sign up and log in a user.");
+    }
 
 }
