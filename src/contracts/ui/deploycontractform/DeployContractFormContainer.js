@@ -1,6 +1,6 @@
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import DeployContractForm from './DeployContractForm'
-import { deployContract } from './DeployContractFormAction'
+import {deployContract} from './DeployContractFormAction'
 
 const mapStateToProps = (state, ownProps) => {
     return {}
