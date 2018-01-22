@@ -25,9 +25,6 @@ export function deployContract(contractSpecs) {
     const marketToken = contract(MarketToken);
     marketToken.setProvider(web3.currentProvider);
 
-    // const orderLib = contract(OrderLib);
-    // orderLib.setProvider(web3.currentProvider);
-
     // create array to pass to MARKET contract constructor
     const contractConstructorArray = [
       contractSpecs.priceFloor,
@@ -56,7 +53,7 @@ export function deployContract(contractSpecs) {
             contractSpecs.oracleDataSource,
             contractSpecs.oracleQuery,
             contractSpecs.oracleQueryRepeatSeconds,
-            {gas: 6100000, value: web3.toWei('.2', 'ether'), gasPrice: 100000000, from: coinbase}
+            {gas: 6100000, value: web3.toWei('.2', 'ether'), gasPrice: 100000000, from: coinbase} // TODO remove hard coded gas
           );
         }).then(function (marketContractInstance) {
           marketContractInstanceDeployed = marketContractInstance;

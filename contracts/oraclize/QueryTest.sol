@@ -31,10 +31,6 @@ contract QueryTest is usingOraclize {
     mapping(bytes32 => bool) validScheduledQueryIDs;
     mapping(bytes32 => string) queryResults;
 
-    function QueryTest(){
-
-    }
-
     // events
     event QueryCompleted(bytes32 indexed queryIDCompleted);
 

@@ -1,6 +1,7 @@
 const Ownable = artifacts.require("zeppelin-solidity/contracts/ownership/Ownable.sol");
 const Destructible = artifacts.require("zeppelin-solidity/contracts/lifecycle/Destructible.sol");
 const Authentication = artifacts.require("./Authentication.sol");
+const QueryTest = artifacts.require("./oraclize/QueryTest.sol");
 
 const MathLib = artifacts.require("market-solidity/contracts/libraries/MathLib.sol");
 const OrderLib = artifacts.require("market-solidity/contracts/libraries/OrderLib.sol");
@@ -12,13 +13,14 @@ const MarketToken = artifacts.require("market-solidity/contracts/tokens/MarketTo
 
 
 module.exports = function(deployer, network) {
-  deployer.deploy(Ownable);
-  deployer.link(Ownable, Destructible);
-  deployer.deploy(Destructible);
-  deployer.link(Destructible, Authentication);
-  deployer.deploy(Authentication);
-
   if(network !== "live") {
+    deployer.deploy(Ownable);
+    deployer.link(Ownable, Destructible);
+    deployer.deploy(Destructible);
+    deployer.link(Destructible, Authentication);
+    deployer.deploy(Authentication);
+    deployer.deploy(QueryTest);
+
     deployer.deploy(MathLib);
     deployer.deploy(OrderLib);
     deployer.deploy(MarketContractRegistry)
@@ -104,7 +106,4 @@ module.exports = function(deployer, network) {
       });
     });
   }
-
-
-
 };
