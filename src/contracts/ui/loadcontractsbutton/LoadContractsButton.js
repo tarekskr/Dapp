@@ -1,10 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-const LoadContractButton = ({onUserClick}) => {
+const LoadContractButton = ({ onUserClick }) => {
   return (
-    <button className="pure-button pure-button-primary" onClick={(event) => onUserClick(event)}>Load
-      Contracts</button>
-  )
-}
+    <button
+      className="pure-button pure-button-primary"
+      onClick={event => onUserClick(event)}
+    >
+      Load Contracts
+    </button>
+  );
+};
 
-export default LoadContractButton
+export default LoadContractButton;

@@ -1,57 +1,34 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router'
-import {HiddenOnlyAuth, VisibleOnlyAuth} from './util/wrappers.js'
+import React, { Component } from 'react';
+import { Router, Route } from 'react-router';
 
-// UI Components
-import LoginButtonContainer from './user/ui/loginbutton/LoginButtonContainer'
-import LogoutButtonContainer from './user/ui/logoutbutton/LogoutButtonContainer'
+// Layouts
+import Home from './layouts/home/Home';
+import Deploy from './contracts/layouts/deploy/Deploy';
+import Explorer from './contracts/layouts/explorer/Explorer';
+
+// Components
+import Header from './components/Header';
 
 // Styles
-import './css/oswald.css'
-import './css/open-sans.css'
-import './css/pure-min.css'
-import './App.css'
+import './css/oswald.css';
+import './css/open-sans.css';
+import './css/pure-min.css';
+import './App.css';
+import 'antd/dist/antd.min.css';
 
 class App extends Component {
   render() {
-    const OnlyAuthLinks = VisibleOnlyAuth(() =>
-      <span>
-        <li className="pure-menu-item">
-          <Link to="/dashboard" className="pure-menu-link">Dashboard</Link>
-        </li>
-        <li className="pure-menu-item">
-          <Link to="/profile" className="pure-menu-link">Profile</Link>
-        </li>
-        <LogoutButtonContainer/>
-      </span>
-    )
-
-    const OnlyGuestLinks = HiddenOnlyAuth(() =>
-      <span>
-        <li className="pure-menu-item">
-          <Link to="/signup" className="pure-menu-link">Sign Up</Link>
-        </li>
-        <LoginButtonContainer/>
-      </span>
-    )
-
     return (
-      <div className="App">
-        <nav className="navbar pure-menu pure-menu-horizontal">
-          <ul className="pure-menu-list navbar-right">
-            <OnlyGuestLinks/>
-            <OnlyAuthLinks/>
-          </ul>
-          <Link to="/" className="pure-menu-heading pure-menu-link">Home</Link>
-          <Link to="/deploy" className="pure-menu-heading pure-menu-link">Deploy New Contract</Link>
-          <Link to="/contract-explorer" className="pure-menu-heading pure-menu-link">Contract Explorer</Link>
-          <Link to="/sim-exchange" className="pure-menu-heading pure-menu-link">Sim Exchange</Link>
-        </nav>
-
-        {this.props.children}
-      </div>
+      <Router history={this.props.history}>
+        <div className="App">
+          <Header />
+          <Route exact path="/" component={Home} />
+          <Route path="/contract/deploy" component={Deploy} />
+          <Route path="/contract/explore" component={Explorer} />
+        </div>
+      </Router>
     );
   }
 }
 
-export default App
+export default App;

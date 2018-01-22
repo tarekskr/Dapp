@@ -1,24 +1,24 @@
-import {connect} from 'react-redux'
-import LoadContractsButton from './LoadContractsButton'
-import {loadContracts} from './LoadContractsButtonActions'
+import { connect } from 'react-redux';
+import LoadContractsButton from './LoadContractsButton';
+import { loadContracts } from './LoadContractsButtonActions';
 
 const mapStateToProps = (state, ownProps) => {
-  return {}
-}
+  return {};
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    onUserClick: (event) => {
+    onUserClick: event => {
       event.preventDefault();
 
-      dispatch(loadContracts())
+      dispatch(loadContracts());
     }
-  }
-}
+  };
+};
 
 const LoadContractsButtonContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoadContractsButton)
+)(LoadContractsButton);
 
-export default LoadContractsButtonContainer
+export default LoadContractsButtonContainer;

@@ -1,22 +1,22 @@
-import {connect} from 'react-redux'
-import DeployContractForm from './DeployContractForm'
-import {deployContract} from './DeployContractFormAction'
+import { connect } from 'react-redux';
+import DeployContractForm from './DeployContractForm';
+import { deployContract } from './DeployContractFormAction';
 
 const mapStateToProps = (state, ownProps) => {
-  return {}
-}
+  return {};
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    onDeployContractFormDeploy: (contractSpecs) => {
-      dispatch(deployContract(contractSpecs))
+    onDeployContractFormDeploy: contractSpecs => {
+      dispatch(deployContract(contractSpecs));
     }
-  }
-}
+  };
+};
 
 const DeployContractFormContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(DeployContractForm)
+)(DeployContractForm);
 
-export default DeployContractFormContainer
+export default DeployContractFormContainer;

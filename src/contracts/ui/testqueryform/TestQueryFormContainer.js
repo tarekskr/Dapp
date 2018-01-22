@@ -1,22 +1,21 @@
-import {connect} from 'react-redux'
-import TestQueryForm from './TestQueryForm'
-import {testQuery} from './TestQueryFormAction'
+import { connect } from 'react-redux';
+import TestQueryForm from './TestQueryForm';
+// import {testQuery} from './TestQueryFormAction'
 
 const mapStateToProps = (state, ownProps) => {
-  return {}
-}
+  return {};
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    onTestQueryFormTest: (querySpecs) => {
-      dispatch(testQuery(querySpecs))
+    onTestQueryFormTest: querySpecs => {
+      // dispatch(testQuery(querySpecs))
     }
-  }
-}
+  };
+};
 
-const TestQueryFormContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TestQueryForm)
+const TestQueryFormContainer = connect(mapStateToProps, mapDispatchToProps)(
+  TestQueryForm
+);
 
-export default TestQueryFormContainer
+export default TestQueryFormContainer;
