@@ -3,7 +3,7 @@ import MarketContract from 'market-solidity/build/contracts/MarketContractOracli
 import MarketCollateralPool from 'market-solidity/build/contracts/MarketCollateralPool';
 import MarketToken from 'market-solidity/build/contracts/MarketToken.json';
 
-import store from '../../../store';
+import store from '../store';
 
 const contract = require('truffle-contract');
 

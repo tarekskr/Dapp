@@ -19,7 +19,8 @@ class Header extends Component {
           <div className="ant-col-xs-0 ant-col-sm-0 ant-col-md-18 ant-col-lg-19 ant-col-xl-19 ant-col-xxl-20">
             <ul className="ant-menu menu-site ant-menu-light ant-menu-root ant-menu-horizontal" role="menu" id="nav">
               <NavItem to="/contract/deploy">Deploy Contracts</NavItem>
-              <NavItem to="/contract/explore">Explore Contracts</NavItem>
+              <NavItem to="/contract/explorer">Explore Contracts</NavItem>
+              <NavItem to="/test">Test Query</NavItem>
               <NavItem to="/exchange">Sim Exchange</NavItem>
             </ul>
           </div>

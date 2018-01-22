@@ -1,6 +1,6 @@
 import QueryTest from 'market-solidity/build/contracts/QueryTest';
 
-import store from '../../../store';
+import store from '../store';
 
 const contract = require('truffle-contract');
 

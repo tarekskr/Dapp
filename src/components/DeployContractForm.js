@@ -11,10 +11,9 @@ class DeployContractForm extends Component {
       priceCap: 150,
       priceDecimalPlaces: 2,
       qtyDecimalPlaces: 2,
-      expirationTimeStamp: Math.floor(Date.now() / 1000) + 28 * 86400, //default to 28 days from now
+      expirationTimeStamp: Math.floor(Date.now() / 1000) + 28 * 86400, // default to 28 days from now
       oracleDataSource: 'URL',
-      oracleQuery:
-        'json(https://api.kraken.com/0/public/Ticker?pair=ETHUSD).result.XETHZUSD.c.0',
+      oracleQuery: 'json(https://api.kraken.com/0/public/Ticker?pair=ETHUSD).result.XETHZUSD.c.0',
       oracleQueryRepeatSeconds: 86400
     };
   }
@@ -27,7 +26,7 @@ class DeployContractForm extends Component {
 
   handleDeploy(event) {
     event.preventDefault();
-    this.props.onDeployContractFormDeploy(this.state);
+    this.props.onDeployContract(this.state);
   }
 
   render() {
