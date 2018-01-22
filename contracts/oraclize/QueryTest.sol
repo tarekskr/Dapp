@@ -25,7 +25,7 @@ contract QueryTest is usingOraclize {
     using MathLib for uint;
 
     // constants
-    uint constant public QUERY_CALLBACK_GAS = 100000;
+    uint constant public QUERY_CALLBACK_GAS = 200000;
 
     // state variables
     mapping(bytes32 => bool) validScheduledQueryIDs;
@@ -33,6 +33,7 @@ contract QueryTest is usingOraclize {
 
     // events
     event QueryCompleted(bytes32 indexed queryIDCompleted);
+    event QueryScheduled(bytes32 indexed queryIDScheduled);
 
     /*
     // PUBLIC METHODS
@@ -53,7 +54,15 @@ contract QueryTest is usingOraclize {
             QUERY_CALLBACK_GAS
         );
         validScheduledQueryIDs[queryId] = true;
+        QueryScheduled(queryId);
         return queryId;
+    }
+
+    /// @notice allows a user to retrieve results from their test query.
+    /// @param queryID unique identifier for the query.
+    /// @return results (if any) from the query
+    function getQueryResults(bytes32 queryID) external view returns (string) {
+        return queryResults[queryID];
     }
 
     /// @notice only public for callbacks from oraclize, do not call

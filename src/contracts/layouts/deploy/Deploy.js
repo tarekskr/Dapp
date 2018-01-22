@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import DeployContractFormContainer from '../../ui/deploycontractform/DeployContractFormContainer.js';
+import TestQueryFormContainer from "../../ui/testqueryform/TestQueryFormContainer";
 
 class Deploy extends Component {
   render() {
@@ -15,6 +16,7 @@ class Deploy extends Component {
             {/*learn how to make the above use a local file? */}
             <h1>Create and Deploy MARKET Contracts</h1>
             <DeployContractFormContainer/>
+            <TestQueryFormContainer/>
           </div>
         </div>
       </main>
