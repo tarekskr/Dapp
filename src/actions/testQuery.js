@@ -1,4 +1,4 @@
-import QueryTest from 'market-solidity/build/contracts/QueryTest';
+import QueryTest from 'market-solidity/build/contracts/OraclizeQueryTest';
 
 import store from '../store';
 
