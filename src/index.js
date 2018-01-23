@@ -13,14 +13,14 @@ import store, { history } from './store';
 getWeb3
   .then(results => {
     console.log('Web3 initialized!');
+
+    ReactDOM.render(
+      <Provider store={store}>
+        <App history={history} />
+      </Provider>,
+      document.getElementById('dapp')
+    );
   })
   .catch(() => {
     console.log('Error in web3 initialization.');
   });
-
-ReactDOM.render(
-  <Provider store={store}>
-    <App history={history} />
-  </Provider>,
-  document.getElementById('dapp')
-);

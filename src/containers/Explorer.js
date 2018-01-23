@@ -1,17 +1,12 @@
-import React, { Component } from 'react';
+import { connect } from "react-redux";
+import ContractsList from "../components/ContractsList";
 
-class Explorer extends Component {
-  render() {
-    return (
-      <main className="container">
-        <div className="pure-g">
-          <div className="pure-u-1-1">
-            <p>Loads deployed and whitelisted contracts from the blockchain</p>
-          </div>
-        </div>
-      </main>
-    );
-  }
-}
+const mapStateToProps = (state, ownProps) => {
+  return {
+    explorer: state.explorer
+  };
+};
+
+const Explorer = connect(mapStateToProps)(ContractsList);
 
 export default Explorer;

@@ -1,4 +1,4 @@
-import QueryTest from '../build/contracts/OraclizeQueryTest.json';
+import QueryTest from '../build/contracts/OraclizeQueryTest';
 
 import store from '../store';
 
@@ -8,7 +8,7 @@ export function testQuery(querySpecs) {
   let web3 = store.getState().web3.web3Instance;
 
   // Double-check web3's status.
-  if (typeof web3 !== 'undefined') {
+  if (web3 && typeof web3 !== 'undefined') {
     // Using truffle-contract create needed contract objects and set providers
     const queryTest = contract(QueryTest);
     queryTest.setProvider(web3.currentProvider);
