@@ -5,10 +5,12 @@ import web3Reducer from '../util/web3/web3Reducer';
 
 import deploy from './deploy';
 import explorer from './explorer';
+import testQuery from './testQuery';
 
 export default combineReducers({
   routing: routerReducer,
   web3: web3Reducer,
   deploy: deploy,
   explorer: explorer,
+  testQuery: testQuery,
 });

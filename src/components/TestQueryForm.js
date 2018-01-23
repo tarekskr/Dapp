@@ -19,7 +19,7 @@ class TestQueryForm extends Component {
 
   handleDeploy(event) {
     event.preventDefault();
-    this.props.onTestQueryFormTest(this.state);
+    this.props.onTestQuery(this.state);
   }
 
   render() {

@@ -3,12 +3,14 @@ import TestQueryForm from '../components/TestQueryForm';
 import { testQuery } from '../actions/testQuery';
 
 const mapStateToProps = (state, ownProps) => {
-  return {};
+  return {
+    testQuery: state.testQuery
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTestQueryFormTest: querySpecs => {
+    onTestQuery: querySpecs => {
       dispatch(testQuery(querySpecs))
     }
   };
