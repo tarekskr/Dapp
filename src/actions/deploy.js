@@ -1,7 +1,7 @@
-import MarketContractRegistry from 'market-solidity/build/contracts/MarketContractRegistry';
-import MarketContract from 'market-solidity/build/contracts/MarketContractOraclize';
-import MarketCollateralPool from 'market-solidity/build/contracts/MarketCollateralPool';
-import MarketToken from 'market-solidity/build/contracts/MarketToken.json';
+import MarketContractRegistry from '../build/contracts/MarketContractRegistry';
+import MarketContract from '../build/contracts/MarketContractOraclize';
+import MarketCollateralPool from '../build/contracts/MarketCollateralPool';
+import MarketToken from '../build/contracts/MarketToken.json';
 
 import store from '../store';
 

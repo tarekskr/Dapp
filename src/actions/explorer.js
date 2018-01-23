@@ -1,6 +1,6 @@
-import MarketContractRegistry from 'market-solidity/build/contracts/MarketContractRegistry';
-import MarketContract from 'market-solidity/build/contracts/MarketContractOraclize';
-import MarketCollateralPool from 'market-solidity/build/contracts/MarketCollateralPool';
+import MarketContractRegistry from '../build/contracts/MarketContractRegistry';
+import MarketContract from '../build/contracts/MarketContractOraclize';
+import MarketCollateralPool from '../build/contracts/MarketCollateralPool';
 
 import store from '../store';
 
