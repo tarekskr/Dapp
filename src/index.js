@@ -4,10 +4,17 @@ import { Provider } from 'react-redux';
 import getWeb3 from './util/web3/getWeb3';
 
 // Layouts
+import Splash from './Splash'
 import App from './App';
 
 // Redux Store
 import store, { history } from './store';
+
+// Display Splash until web3 is initialized
+ReactDOM.render(
+  <Splash width='500px' height='500px' alt='Initializing Web3...' />,
+  document.getElementById('dapp')
+);
 
 // Initialize web3 and set in Redux
 getWeb3
